@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=WindSong&display=swap');
+
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.search_box{
+    width: 70%;
+    height: 32px;
+    padding: 8px;
+    margin: calc(50vh - 100px) auto;
+    border-radius: 5px;
+}
+
+.fast_search {
+    background-color: #ffffff;
+    width: 62.5%;
+    padding: 8px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 10;
+    border: 1px solid #fedb4d;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.fast_search > a {
+    width: 100%;
+    display: block;
+    padding: 5px;
+}
+
+.fast_search > a:hover {
+    background-color: #eeeeee;
+}
+
+.Button2.Button2_theme_websearch .Button2-Text {
+    margin-left: 0;
+}
+
+.search_input{
+    border-left: 2px solid #fedb4d;
+    float: left;
+    width: 91%;
+}
+
+.search_button {
+    float: right;
+}
+
+.logo{
+    font-family: 'WindSong', cursive;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 70px;
+    text-transform: capitalize;
+    font-weight: bolder;
+}
+
+.logo:first-letter {
+    color: #fb401e
+}
