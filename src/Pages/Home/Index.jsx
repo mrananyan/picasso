@@ -51,7 +51,7 @@ class Home extends React.Component {
         fetch(`http://localhost/api/autocomplete?q=${q}`)
             .then(res => res.json())
             .then(res => {
-                this.setState({fastSearch: res});
+                this.setState({fastSearch: [... res]});
             })
     }
 
@@ -77,7 +77,7 @@ class Home extends React.Component {
                         theme="websearch"
                         value={value}
                         onChange={(event) => {
-                            this.setState({...this.state, value: event.target.value});
+                            this.setState({value: event.target.value});
                             this.handleFastSearch(event.target.value);
                         }}
 
@@ -96,12 +96,11 @@ class Home extends React.Component {
                     <div style={fastSearchStyle} className={`fast_search`}>
                         {fastSearch?.map((res, index) => {
                             return (
-                                <Link onClick={() => this.handleFsClick(res)}>{res}</Link>
+                                <Link key={index} to={`#`} onClick={() => this.handleFsClick(res)}>{res}</Link>
                             )
                         })}
                     </div>
                 )}
-
             </>
         )
     }
