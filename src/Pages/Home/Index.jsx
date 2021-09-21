@@ -7,6 +7,8 @@ import "./Home.css"
 import {Link} from "react-router-dom";
 import searchIcon from '../../Assets/images/search.svg'
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -63,7 +65,7 @@ class Home extends React.Component {
                     margin: fastSearch ? 'calc(50vh - 200px) auto' : 'calc(50vh - 100px) auto'
                 }} action="/search" className="search_box" method="get">
                     <Link to={`/`}>
-                        <h1 className={`logo`}>picasso</h1>
+                        <h1 style={{fontSize: "70px"}} className={`logo`}>picasso</h1>
                     </Link>
                     <Textinput
                         iconLeft={<Icon url={searchIcon} />}
@@ -76,9 +78,10 @@ class Home extends React.Component {
                         pin={`clear-round`}
                         theme="websearch"
                         value={value}
-                        onChange={(event) => {
+                        onChange={async (event) => {
                             this.setState({value: event.target.value});
                             this.handleFastSearch(event.target.value);
+                            await sleep(2000);
                         }}
 
                     />

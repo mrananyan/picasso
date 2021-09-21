@@ -18,6 +18,7 @@ a {
     width: 62.5%;
     padding: 8px;
     margin: 0 auto;
+    text-transform: capitalize;
     position: absolute;
     z-index: 10;
     border: 1px solid #fedb4d;

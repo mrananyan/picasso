@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=WindSong&display=swap');
+
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.header {
+    background: #ffffff;
+    top: 0;
+    margin-top: 0;
+    width: 100%;
+    height: 55px;
+    box-shadow: 0 0 20px;
+    position: fixed;
+}
+
+.logo_a{
+    margin-left: 20px;
+}
+
+.header > * {
+    float: left;
+}
+
+.search_box{
+    width: 40%;
+    height: 32px;
+    padding: 8px;
+    border-radius: 5px;
+    margin: 0 0 0 20px;
+}
+
+.fast_search {
+    background-color: #ffffff;
+    width: 32.5%;
+    padding: 8px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 10;
+    border: 1px solid #fedb4d;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    text-transform: capitalize;
+    top: 44px;
+    left: 193px;
+}
+
+.fast_search > a {
+    width: 100%;
+    display: block;
+    padding: 5px;
+}
+
+.fast_search > a:hover {
+    background-color: #eeeeee;
+}
+
+.Button2.Button2_theme_websearch .Button2-Text {
+    margin-left: 0;
+}
+
+.search_input{
+    border-left: 2px solid #fedb4d;
+    float: left;
+    width: 84%;
+}
+
+.search_button {
+    float: right;
+}
+
+.logo{
+    font-family: 'WindSong', cursive;
+    margin: auto;
+    padding-bottom: 10px;
+    font-size: 40px;
+    text-transform: capitalize;
+    font-weight: bolder;
+}
+
+.logo:first-letter {
+    color: #fb401e
+}
+
+.related_searches {
+    margin-top: 70px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #fedb4d;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.comma-list {
+    display: inline;
+    list-style: none;
+    padding: 0;
+}
+
+.comma-list li {
+    display: inline;
+}
+
+.comma-list li::after {
+    content: ", ";
+}
+
+.comma-list li:last-child::after {
+    content: "";
+}
+
+
+
+.results {
+    display: grid;
+    grid-gap: 2px;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    grid-auto-rows: 200px;
+}
+
+@media screen and (max-width: 600px) {
+    .results > img {
+        width: 100% !important;
+    }
+}
