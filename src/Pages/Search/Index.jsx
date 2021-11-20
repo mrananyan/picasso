@@ -7,6 +7,7 @@ import "./Search.css"
 import {Link} from "react-router-dom";
 import searchIcon from '../../Assets/images/search.svg'
 import Photo from "../../Components/Photo/Photo";
+import View from "../../Components/View/View";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -23,7 +24,8 @@ class Search extends React.Component {
             pages: 0,
             page: 1,
             total: 0,
-            related_searches: []
+            related_searches: [],
+            view: {}
         };
     }
 
@@ -53,10 +55,10 @@ class Search extends React.Component {
     }
 
     subscribeToScroll(){
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', async () => {
             if (window.scrollY >= (window.innerHeight - 200) && this.state.pages >= this.state.page) {
-                this.getPhotos(this.state.value, this.state.page++);
-                sleep(4000)
+                this.getPhotos(this.state.value, this.state.page + 1);
+                await  sleep(2000)
             }
         })
     }
@@ -90,6 +92,21 @@ class Search extends React.Component {
             .then(res => {
                 this.setState({fastSearch: [... res]});
             })
+    }
+
+    CloseView() {
+        this.setState({view: {}});
+    }
+
+    nextPhoto(index) {
+        alert(index)
+        if (index && this.state.photos[index]){
+            this.setState({view: {
+                    data: this.state.photos[index],
+                    prev: this.state.photos[index - 1] ? index - 1 : 0,
+                    next: this.state.photos[index + 1] ? index + 1 : 0
+                }});
+        }
     }
 
     render() {
@@ -139,7 +156,7 @@ class Search extends React.Component {
                     )}
                 </div>
                 <div className="related_searches">
-                    <p>related keywords: <ul className="comma-list">{this.state.related_searches.map((res, index) => (
+                    <p>Related keywords: <ul className="comma-list">{this.state.related_searches.map((res, index) => (
                         <li><Link key={index} to={`#`} onClick={() => this.handleFsClick(res.title)}>{res.title}</Link></li>
                     ))}</ul></p>
                 </div>
@@ -150,9 +167,22 @@ class Search extends React.Component {
                                 loading={`lazy`}
                                 src={item.urls.thumb}
                                 borderRadius={10}
+                                onClick={() => {
+                                    this.setState({view: {
+                                            data: item,
+                                            prev: this.state.photos[index - 1] ? index - 1 : 0,
+                                            next: this.state.photos[index + 1] ? index + 1 : 0
+                                        }});
+                                }}
                             />
                         )
                     })}
+                    {!! Object.keys(this.state.view).length && (
+                        <View
+                            data={this.state.view}
+                            close={() => this.CloseView()}
+                            nextPhoto={(index) => {this.nextPhoto(index)}} />
+                    )}
                 </div>
             </>
         )

@@ -50,11 +50,13 @@ class Home extends React.Component {
     }
 
     handleFastSearch (q) {
-        fetch(`http://localhost/api/autocomplete?q=${q}`)
-            .then(res => res.json())
-            .then(res => {
-                this.setState({fastSearch: [... res]});
-            })
+        if (this.state.value !== q){
+            fetch(`http://localhost/api/autocomplete?q=${q}`)
+                .then(res => res.json())
+                .then(res => {
+                    this.setState({fastSearch: [... res]});
+                })
+        }
     }
 
     render() {

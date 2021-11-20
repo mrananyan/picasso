@@ -1,0 +1,29 @@
+.view_bg {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 2000;
+    background: #00000089;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: block;
+}
+.view_wrap {
+    width: 80%;
+    margin: 5vh auto;
+}
+
+.view_content {
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.view_photo {
+    margin: 0 auto;
+    height: 90vh;
+    display: block;
+}
