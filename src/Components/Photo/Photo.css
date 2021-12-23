@@ -1,10 +1,8 @@
 .thumb_photo{
+    opacity: 0.80;
     grid-row-end: span 1;
 }
 .thumb_photo:hover {
-    z-index: 99;
-    zoom: 1.7;
-    box-shadow: 0 0 18px;
-    margin-left: -50%;
-    cursor: pointer;
+    opacity: 1;
+    cursor: zoom-in;
 }

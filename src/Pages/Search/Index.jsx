@@ -21,6 +21,7 @@ class Search extends React.Component {
             fastSearch: [],
             value: this.getQuery(),
             photos: [],
+            viewIndex: 0,
             pages: 0,
             page: 1,
             total: 0,
@@ -44,7 +45,7 @@ class Search extends React.Component {
 
     getPhotos(q,page){
         this.setState({page: page});
-        fetch(`http://localhost/api/search?q=${q}&page=${page}`)
+        fetch(`${process.env.REACT_APP_BACKEND}/api/search?q=${q}&page=${page}`)
             .then(res => res.json())
             .then(res => {
                 this.setState({photos: [...this.state.photos, ...res.photos.results]});
@@ -55,6 +56,26 @@ class Search extends React.Component {
     }
 
     subscribeToScroll(){
+        window.addEventListener('keyup', (e) => {
+            console.log(e.keyCode);
+            switch (e.keyCode) {
+                case 37:
+                    // Left arrow
+                    this.prevPhoto();
+                    break;
+                case 27:
+                    // Close by esc
+                    this.CloseView();
+                    break;
+                case 39:
+                    // right
+                    this.nextPhoto();
+                    break;
+                case 40:
+                    // down
+                    break;
+            }
+        });
         window.addEventListener('scroll', async () => {
             if (window.scrollY >= (window.innerHeight - 200) && this.state.pages >= this.state.page) {
                 this.getPhotos(this.state.value, this.state.page + 1);
@@ -79,15 +100,13 @@ class Search extends React.Component {
     }
 
     handleFsClick (q) {
-        this.setState({value: q});
         this.setState({fastSearch: []})
-        setTimeout(function (){
-            document.querySelector('.search_box').submit();
-        }, 1500)
+        this.setState({value: q});
+        document.querySelector('.search_box').submit();
     }
 
     handleFastSearch (q) {
-        fetch(`http://localhost/api/autocomplete?q=${q}`)
+        fetch(`${process.env.REACT_APP_BACKEND}/api/autocomplete?q=${q}`)
             .then(res => res.json())
             .then(res => {
                 this.setState({fastSearch: [... res]});
@@ -98,24 +117,35 @@ class Search extends React.Component {
         this.setState({view: {}});
     }
 
-    nextPhoto(index) {
-        alert(index)
-        if (index && this.state.photos[index]){
-            this.setState({view: {
-                    data: this.state.photos[index],
-                    prev: this.state.photos[index - 1] ? index - 1 : 0,
-                    next: this.state.photos[index + 1] ? index + 1 : 0
-                }});
+    prevPhoto() {
+        if (!Object.keys(this.state.view).length) return;
+        let index = (this.state.viewIndex + this.state.photos.length - 1) % this.state.photos.length;
+        this.setState({
+            view: {... this.state.view, ...this.state.photos[index]},
+            viewIndex: index
+        });
+    }
+
+    nextPhoto() {
+        if (!Object.keys(this.state.view).length) return;
+        let index = (this.state.viewIndex + this.state.photos.length + 1) % this.state.photos.length;
+        if (index > this.state.photos.length - 10) {
+            this.getPhotos(this.state.value, this.state.page + 1);
         }
+        this.setState({
+            view: {... this.state.view, ...this.state.photos[index]},
+            viewIndex: index
+        });
     }
 
     render() {
         const {value, fastSearch, fastSearchStyle} = this.state;
+        window.document.title = `${value} - picasso high quality premium images free of charge`;
         return (
             <>
                 <div className="header">
                     <Link to={`/`} className={`logo_a`}>
-                        <h1 className={`logo`}>picasso</h1>
+                        <h1 className={`logo`}>{window.innerWidth <= 800 ? 'P' : 'picasso'}</h1>
                     </Link>
                     <form action="/search" className="search_box" method="get">
                         <Textinput
@@ -142,7 +172,7 @@ class Search extends React.Component {
                             size="m"
                             type={`submit`}
                             baseline={true}>
-                            Search
+                            {window.innerWidth <= 800 ? 'Go' : 'Search'}
                         </Button>
                     </form>
                     {fastSearch.length > 0 && (
@@ -168,11 +198,10 @@ class Search extends React.Component {
                                 src={item.urls.thumb}
                                 borderRadius={10}
                                 onClick={() => {
-                                    this.setState({view: {
-                                            data: item,
-                                            prev: this.state.photos[index - 1] ? index - 1 : 0,
-                                            next: this.state.photos[index + 1] ? index + 1 : 0
-                                        }});
+                                    this.setState({
+                                        view: item,
+                                        viewIndex: index
+                                    });
                                 }}
                             />
                         )
@@ -181,7 +210,9 @@ class Search extends React.Component {
                         <View
                             data={this.state.view}
                             close={() => this.CloseView()}
-                            nextPhoto={(index) => {this.nextPhoto(index)}} />
+                            prevPhoto={() => {this.prevPhoto()}}
+                            nextPhoto={() => {this.nextPhoto()}}
+                        />
                     )}
                 </div>
             </>

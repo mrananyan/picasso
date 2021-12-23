@@ -1,3 +1,6 @@
+html, body {
+    overflow-x: hidden !important;
+}
 .view_bg {
     height: 100%;
     width: 100%;
@@ -22,8 +25,35 @@
     height: 100%;
 }
 
+.view_content > img {
+    max-width: 100%;
+    object-fit: contain;
+}
+
 .view_photo {
     margin: 0 auto;
     height: 90vh;
     display: block;
+}
+
+.controll {
+    width: 210px;
+    background: black;
+    color: #fff;
+    font-weight: bold;
+    padding: 6px;
+    margin-top: -15px;
+    right: 15px;
+    position: fixed;
+}
+
+.controll > a {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.controll > a:hover {
+    color: #ffdb4d;
+    text-decoration: underline;
 }

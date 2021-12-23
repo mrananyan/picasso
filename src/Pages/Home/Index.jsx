@@ -41,17 +41,16 @@ class Home extends React.Component {
         })
     }
 
-    handleFsClick (q) {
+    async handleFsClick (q) {
         this.setState({value: q});
         this.setState({fastSearch: []})
-        setTimeout(function (){
-            document.querySelector('.search_box').submit();
-        }, 1500)
+        await sleep();
+        document.querySelector('.search_box').submit();
     }
 
     handleFastSearch (q) {
         if (this.state.value !== q){
-            fetch(`http://localhost/api/autocomplete?q=${q}`)
+            fetch(process.env.REACT_APP_BACKEND+`/api/autocomplete?q=${q}`)
                 .then(res => res.json())
                 .then(res => {
                     this.setState({fastSearch: [... res]});
@@ -94,7 +93,7 @@ class Home extends React.Component {
                         size="m"
                         type={`submit`}
                         baseline={true}>
-                        Search
+                        {window.innerWidth <= 800 ? 'Go': 'Search'}
                     </Button>
                 </form>
                 {fastSearch.length > 0 && (

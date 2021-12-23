@@ -6,7 +6,7 @@ a {
 }
 
 .search_box{
-    width: 70%;
+    width: 70vw;
     height: 32px;
     padding: 8px;
     margin: calc(50vh - 100px) auto;
@@ -15,7 +15,7 @@ a {
 
 .fast_search {
     background-color: #ffffff;
-    width: 62.5%;
+    width: 61.5vw;
     padding: 8px;
     margin: 0 auto;
     text-transform: capitalize;
@@ -64,4 +64,17 @@ a {
 
 .logo:first-letter {
     color: #fb401e
+}
+
+
+@media screen and (max-width: 800px) {
+    .search_box {
+        width: 80vw !important;
+    }
+    .Button2 {
+        width: 12vw !important;
+    }
+    .fast_search {
+        width: 73vw !important;
+    }
 }
