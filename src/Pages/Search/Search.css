@@ -86,7 +86,7 @@ a {
 }
 
 .related_searches {
-    margin-top: 70px;
+    margin-top: 60px;
     padding: 5px 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #fedb4d;
@@ -127,6 +127,23 @@ a {
     height: calc(100vw / 7);
     margin: 1vw;
     cursor: zoom-in;
+}
+
+.related_searches {
+    width: 98vw;
+    display: flex;
+    white-space: nowrap;
+}
+
+.related_searches > * {
+    float: left;
+    margin-right: 5px;
+    display: inline-block;
+}
+.related_searches > button {
+    background: #eeeeee;
+    border-radius: 5px;
+    padding: 2px;
 }
 
 @media screen and (max-width: 800px) {

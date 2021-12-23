@@ -186,9 +186,10 @@ class Search extends React.Component {
                     )}
                 </div>
                 <div className="related_searches">
-                    <p>Related keywords: <ul className="comma-list">{this.state.related_searches.map((res, index) => (
-                        <li><Link key={index} to={`#`} onClick={() => this.handleFsClick(res.title)}>{res.title}</Link></li>
-                    ))}</ul></p>
+                    <span>Related keywords: </span>
+                    {this.state.related_searches.map((res, index) => (
+                        <Button onClick={() => this.handleFsClick(res.title)}>{res.title}</Button>
+                    ))}
                 </div>
                 <div className="results">
                     {this.state.photos.map((item, index) => {
