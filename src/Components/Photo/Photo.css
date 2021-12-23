@@ -1,8 +1,6 @@
 .thumb_photo{
-    opacity: 0.80;
     grid-row-end: span 1;
 }
 .thumb_photo:hover {
-    opacity: 1;
     cursor: zoom-in;
 }
