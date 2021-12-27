@@ -10,11 +10,10 @@ a {
     background: #ffffff;
     top: 0;
     margin-top: 0;
-    width: 57.6vw;
+    width: 100vw;
     height: 55px;
     box-shadow: 0 0 20px;
     position: fixed;
-    left: 14vw;
 }
 
 .logo_a{
@@ -35,7 +34,7 @@ a {
 
 .fast_search {
     background-color: #ffffff;
-    width: 61.5vw;
+    width: 57.6vw;
     padding: 8px;
     margin: 0 auto;
     position: absolute;
